@@ -1,7 +1,41 @@
 import React from "react";
 
 const TopButtons = () => {
-    return <div>TopButtons</div>;
+
+    const cities = [
+        {
+            id: 1,
+            name: "London"
+        },
+        {
+            id: 2,
+            name: "Sydney"
+        },
+        {
+            id: 3,
+            name: "Tokyo",
+        },
+        {
+            id: 4,
+            name: "Paris",
+        },
+        {
+            id: 5,
+            name: "Toronto",
+        },
+    ]
+
+    return (
+        <div className="flex items-center justify-around my-6">
+            {cities.map((city) => (
+                <button
+                    key={city.id} 
+                    className="text-lg font-medium hover:bg-gray700/20 px-03 py-2 rounded-md transition ease-in">
+                    {city.name}
+                </button>
+            ))}
+        </div>
+    )
 }
 
 export default TopButtons;
