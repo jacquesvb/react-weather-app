@@ -8,6 +8,15 @@ const Inputs = ({ setQuery, setUnits }) => {
     if (city !== "") setQuery({ q: city });
   };
 
+  const handleLocationClick = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        const { latitude, longitude } = position.coords;
+        setQuery({ lat: latitude, lon: longitude });
+      });
+    }
+  };
+
   return (
     <div className="flex flex-row justify-center my-6">
       <div className="flex flex-row w-3/4 items-center justify-center space-x-4">
@@ -26,6 +35,7 @@ const Inputs = ({ setQuery, setUnits }) => {
         <BiCurrentLocation
           size={30}
           className="cursor-pointer transmission ease-out hover:scale-125"
+          onClick={handleLocationClick}
         />
         <div className="flex flex-row w-1/4 items-center justify-center">
           <button className="text-2xl font-medium transition ease-out hover:scale-125">
