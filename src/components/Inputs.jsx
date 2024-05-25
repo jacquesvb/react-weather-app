@@ -38,11 +38,17 @@ const Inputs = ({ setQuery, setUnits }) => {
           onClick={handleLocationClick}
         />
         <div className="flex flex-row w-1/4 items-center justify-center">
-          <button className="text-2xl font-medium transition ease-out hover:scale-125">
+          <button
+            className="text-2xl font-medium transition ease-out hover:scale-125"
+            onClick={() => setUnits("metric")}
+          >
             °C
           </button>
           <p className="text-2xl font-medium mx-2">|</p>
-          <button className="text-2xl font-medium transition ease-out hover:scale-125">
+          <button
+            className="text-2xl font-medium transition ease-out hover:scale-125"
+            onClick={() => setUnits("imperial")}
+          >
             °F
           </button>
         </div>
