@@ -5,6 +5,12 @@ import TimeAndLocation from "./components/TimeAndLocation";
 import TempAndDetails from "./components/TempAndDetails";
 import Forecast from "./components/Forecast";
 import getFormattedWeatherData from "./services/weatherService";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
 
 const App = () => {
   const [query, setQuery] = useState({ q: "london" });
@@ -12,7 +18,11 @@ const App = () => {
   const [weather, setWeather] = useState(null);
 
   const getWeather = async () => {
+    const cityName = query.q ? query.q : "current location";
+    toast.info(`Fetching weather data for ${capitalizeFirstLetter(cityName)}`);
+
     await getFormattedWeatherData({ ...query, units }).then((data) => {
+      toast.success(`Fetched weather data for ${data.name}, ${data.country}`);
       setWeather(data);
     });
   };
@@ -43,6 +53,8 @@ const App = () => {
           <Forecast title="daily forecast" data={weather.daily} />
         </>
       )}
+
+      <ToastContainer autoClose={2500} hideProgressBar={true} theme="colored" />
     </div>
   );
 };
