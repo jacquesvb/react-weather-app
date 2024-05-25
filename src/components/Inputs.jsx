@@ -12,12 +12,24 @@ const Inputs = ({ setQuery, setUnits }) => {
     if (city !== "" && event.key === "Enter") setQuery({ q: city });
   };
 
+  const geoOptions = {
+    enableHighAccuracy: true,
+    timeout: 5000,
+    maximumAge: 0,
+  };
+
   const handleLocationClick = () => {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        const { latitude, longitude } = position.coords;
-        setQuery({ lat: latitude, lon: longitude });
-      });
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          setQuery({ lat: latitude, lon: longitude });
+        },
+        (error) => {
+          console.error(error);
+        },
+        geoOptions
+      );
     }
   };
 

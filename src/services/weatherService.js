@@ -56,8 +56,6 @@ const formatCurrent = (data) => {
 };
 
 const formatForecastWeather = (secs, offset, data) => {
-  console.log(secs);
-  // hourly
   const hourly = data
     .filter((f) => f.dt > secs)
     .map((f) => ({
@@ -68,7 +66,6 @@ const formatForecastWeather = (secs, offset, data) => {
     }))
     .slice(0, 5);
 
-  // daily
   const daily = data
     .filter((f) => f.dt_txt.slice(-8) === "00:00:00")
     .map((f) => ({
